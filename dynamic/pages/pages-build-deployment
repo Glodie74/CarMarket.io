@@ -1,0 +1,5 @@
+jobs:
+  build:
+    steps:
+      - name: Build site
+        run: jekyll build --source ./docs --destination ./_site
