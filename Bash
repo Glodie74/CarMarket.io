@@ -1,0 +1,18 @@
+# Create the docs directory and a placeholder
+mkdir docs
+touch docs/.gitkeep
+
+# Create the assets/css directory and a basic SCSS file
+mkdir -p assets/css
+echo "// Basic SCSS placeholder" > assets.css.style.scss
+
+# Create a minimal Jekyll configuration file
+cat <<EOF > _config.yml
+title: Eden'sCarShop
+description: Edens'sCarShop Jekyll site
+EOF
+
+# Stage and commit the new files
+git add docs/.gitkeep assets.css.style.scss _config.yml
+git commit -m "Add missing docs directory, style.scss, and basic _config.yml"
+git push
