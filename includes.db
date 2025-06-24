@@ -1,0 +1,40 @@
+<?php
+// filepath: /home/owqtzvqw/domains/edenshop.co.za/public_html/includes/db.php
+
+// Environment detection
+$is_local = (
+    $_SERVER['HTTP_HOST'] === 'localhost' || 
+    $_SERVER['HTTP_HOST'] === '127.0.0.1' || 
+    strpos($_SERVER['HTTP_HOST'], 'localhost:') === 0
+);
+
+if ($is_local) {
+    // Local development settings
+    $host = 'localhost';
+    $dbname = 'crudoperation';
+    $username = 'root';
+    $password = '';
+} else {
+    // Live server settings - UPDATE THESE WITH YOUR ACTUAL CREDENTIALS
+    $host = 'localhost';
+    $dbname = 'owqtzvqw_edenshop'; // Your actual database name
+    $username = 'owqtzvqw_dbuser'; // Your actual database username  
+    $password = 'your_actual_password'; // Your actual database password
+}
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    error_log("Database connection failed: " . $e->getMessage());
+    if ($is_local) {
+        die("Database connection failed: " . $e->getMessage());
+    } else {
+        die("Database connection error. Please try again later.");
+    }
+}
+
+// Set timezone
+date_default_timezone_set('Africa/Johannesburg');
+?>
